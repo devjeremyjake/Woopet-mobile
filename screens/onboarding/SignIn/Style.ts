@@ -33,6 +33,11 @@ const styles = StyleSheet.create({
 	submitButton: {
 		marginTop: DIMENSION_1,
 	},
+	backButton: {
+		display: 'flex',
+		alignItems: 'flex-start',
+		justifyContent: 'flex-start',
+	},
 });
 
 export default styles;

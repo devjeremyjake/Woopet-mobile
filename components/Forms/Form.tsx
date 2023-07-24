@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Formik } from 'formik';
 
 type formProp = {
-	onSubmit: () => void;
+	onSubmit: (e: { fullname: string; email: string; password: string }) => void;
 	children: React.ReactNode;
 	initialValues: {
 		fullname: string;

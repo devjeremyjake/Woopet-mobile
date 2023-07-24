@@ -1,20 +1,19 @@
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
 import { Form, FormField, SubmitButton } from '../../../components/Forms';
-import { useNavigation } from '@react-navigation/native';
 import { MyNavigationProp } from '../../../types/custom';
 import SafeAreaComponent from '../../../components/SafeAreaComponent/SafeAreaComponent';
 import BackArrow from '../../../assets/svgs/BackArrow';
 import styles from './Style';
 
 const validationSchema = Yup.object().shape({
-	fullname: Yup.string().required().label('fullname'),
 	email: Yup.string().required().email().label('email'),
 	password: Yup.string().required().label('password'),
 });
 
-const SignUp = () => {
+const SignIn = () => {
 	const navigation = useNavigation<MyNavigationProp>();
 	return (
 		<SafeAreaComponent>
@@ -25,8 +24,8 @@ const SignUp = () => {
 					</View>
 				</TouchableWithoutFeedback>
 				{/* content */}
-				<Text style={styles.mainHeading}>Let’s start here</Text>
-				<Text style={styles.subheading}>Fill in your details to begin</Text>
+				<Text style={styles.mainHeading}>Let’s continue</Text>
+				<Text style={styles.subheading}>Log in to view offers</Text>
 				<View>
 					<Form
 						initialValues={{ email: '', fullname: '', password: '' }}
@@ -34,15 +33,6 @@ const SignUp = () => {
 						validationSchema={validationSchema}
 					>
 						<View>
-							<FormField
-								autoCorrect={false}
-								name="fullname"
-								placeholder="Enter fullname"
-								textContentType="none"
-								keyboardType="default"
-								isPassword={false}
-								fieldName="Fullname"
-							/>
 							<FormField
 								autoCorrect={false}
 								name="email"
@@ -71,4 +61,4 @@ const SignUp = () => {
 	);
 };
 
-export default SignUp;
+export default SignIn;

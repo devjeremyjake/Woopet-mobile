@@ -11,9 +11,14 @@ interface ButtonProp {
 const ButtonComponent: FC<ButtonProp> = ({ title, onPress }) => {
 	return (
 		<TouchableWithoutFeedback onPress={onPress}>
-			<LinearGradient colors={['#FE8F4B', '#FB724C']} style={styles.container}>
-				<Text style={styles.actionText}>{title}</Text>
-			</LinearGradient>
+			<View>
+				<LinearGradient
+					colors={['#FE8F4B', '#FB724C']}
+					style={styles.container}
+				>
+					<Text style={styles.actionText}>{title}</Text>
+				</LinearGradient>
+			</View>
 		</TouchableWithoutFeedback>
 	);
 };

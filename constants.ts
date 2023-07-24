@@ -16,6 +16,7 @@ export const BASE_GREY_2 = 'rgba(176, 176, 176, 1)';
 export const BASE_GREY_3 = 'rgba(240, 240, 240, 1)';
 export const BASE_BLUE = 'rgba(59, 89, 152, 1)';
 export const WHITE = 'rgba(252, 252, 252, 1)';
+export const BASE_RED = 'rgba(255,0,0, 1)';
 
 export const DIMENSION_1 = 20;
 export const DIMENSION_2 = 10;

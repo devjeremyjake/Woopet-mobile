@@ -1,5 +1,5 @@
 import { View, Text, FlatList, Animated } from 'react-native';
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { SLIDER_DATA } from './DATA';
 import styles from './Style';
 
@@ -13,10 +13,31 @@ const SliderText = ({ item }: itemRenderedProp) => {
 	);
 };
 
+const Pagination = ({ indexNumber }: { indexNumber: number }) => (
+	<View style={styles.pagination}>
+		{SLIDER_DATA?.map((_, index) => (
+			<View style={styles.outerCover} key={index}>
+				<View
+					style={
+						indexNumber === index
+							? [styles.outerCover, styles.activeStyle]
+							: [styles.outerCover, styles.defaultStyle]
+					}
+				/>
+			</View>
+		))}
+	</View>
+);
+
 const WelcomeSlider = () => {
 	const [indexPosition, setIndex] = useState(0);
 	const scrollX = useRef(new Animated.Value(0)).current;
-	const handleOnScroll = (event: any) => {
+	const renderItem = useCallback(
+		({ item }: itemRenderedProp) => <SliderText item={item} />,
+		[]
+	);
+
+	const handleOnScroll = useCallback((event: any) => {
 		Animated.event(
 			[
 				{
@@ -31,7 +52,7 @@ const WelcomeSlider = () => {
 				useNativeDriver: false,
 			}
 		)(event);
-	};
+	}, []);
 
 	const handleOnViewableItemsChanged = useRef(({ viewableItems }: any) => {
 		setIndex(viewableItems[0].index);
@@ -43,22 +64,10 @@ const WelcomeSlider = () => {
 
 	return (
 		<>
-			<View style={styles.pagination}>
-				{SLIDER_DATA?.map((_, index) => (
-					<View style={styles.outerCover} key={index}>
-						<View
-							style={
-								indexPosition === index
-									? [styles.outerCover, styles.activeStyle]
-									: [styles.outerCover, styles.defaultStyle]
-							}
-						/>
-					</View>
-				))}
-			</View>
+			<Pagination indexNumber={indexPosition} />
 			<FlatList
 				data={SLIDER_DATA}
-				renderItem={({ item }: itemRenderedProp) => <SliderText item={item} />}
+				renderItem={renderItem}
 				horizontal
 				pagingEnabled
 				snapToAlignment="center"

@@ -1,14 +1,7 @@
 import * as React from 'react';
-import Svg, { Path } from 'react-native-svg';
-const SVGComponent = (props) => (
-	<Svg
-		width={38}
-		height={38}
-		viewBox="0 0 28 28"
-		fill="none"
-		xmlns="http://www.w3.org/2000/svg"
-		{...props}
-	>
+import Svg, { Path, SvgProps } from 'react-native-svg';
+const SVGComponent = (props: SvgProps) => (
+	<Svg width={38} height={38} viewBox="0 0 28 28" fill="none" {...props}>
 		<Path
 			d="M4.95831 14.3199L22.4583 14.3199"
 			stroke="#2B2B2B"

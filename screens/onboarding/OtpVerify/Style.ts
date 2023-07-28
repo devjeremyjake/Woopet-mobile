@@ -30,21 +30,13 @@ const styles = StyleSheet.create({
 		color: BASE_GREY_2,
 		marginBottom: DIMENSION_1,
 	},
-	submitButton: {
-		marginTop: DIMENSION_1,
-	},
-	backButton: {
+	verifierContainer: {
+		marginHorizontal: DIMENSION_1,
 		display: 'flex',
-		alignItems: 'flex-start',
-		justifyContent: 'flex-start',
+		justifyContent: 'center',
 	},
-	forPasswordText: {
-		fontFamily: HEADING_FONT,
-		fontWeight: '700',
-		fontSize: FONT_SIZE_4,
-		color: BASE_BLACK,
-		marginTop: DIMENSION_2,
-		textAlign: 'right',
+	buttonContainer: {
+		marginTop: 'auto',
 	},
 });
 

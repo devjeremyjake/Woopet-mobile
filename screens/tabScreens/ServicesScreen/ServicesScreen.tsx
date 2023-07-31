@@ -1,13 +1,8 @@
-import { View, Text } from 'react-native';
 import React from 'react';
-import SafeAreaComponent from '../../../components/SafeAreaComponent/SafeAreaComponent';
+import ServiceNavigator from '../../../navigations/ServiceNavigator';
 
 const ServicesScreen = () => {
-	return (
-		<SafeAreaComponent>
-			<Text>ServicesScreen</Text>
-		</SafeAreaComponent>
-	);
+	return <ServiceNavigator />;
 };
 
 export default ServicesScreen;

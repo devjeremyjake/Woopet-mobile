@@ -7,9 +7,12 @@ import { MyNavigationProp } from '../../../types/custom';
 import SafeAreaComponent from '../../../components/SafeAreaComponent/SafeAreaComponent';
 import BackArrow from '../../../assets/svgs/BackArrow';
 import styles from './Style';
+import authStorage from '../../../auth/Storage';
 import useLocation from '../../../hooks/useLocation/useLocation';
 import LoadingComponent from '../../../components/LoadingComponent/LoadingComponent';
 import KeyBoardAvoidView from '../../../components/KeyBoardAvoidView/KeyBoardAvoidView';
+import { SignUpUser } from '../../../apis/auth/Auth';
+import routes from '../../../navigations/routes';
 
 const validationSchema = Yup.object().shape({
 	fullname: Yup.string().required().label('fullname'),
@@ -30,6 +33,7 @@ const SignUp = () => {
 		email: string;
 		password: string;
 	}) => {
+		setIsLoading(true);
 		try {
 			const object = JSON.stringify({
 				name: fullname,
@@ -40,10 +44,18 @@ const SignUp = () => {
 				city: address?.[0]?.city,
 				country: address?.[0]?.country,
 			});
-			console.log('Response', object);
+			const response = await SignUpUser(object);
+			if (response.status === 200) {
+				await authStorage.storeToken(response.data.token);
+				await authStorage.getToken();
+				navigation.navigate(routes.OTP_VERIFY_SCREEN, { email });
+			} else {
+				console.log('Error', response.data.message);
+			}
 		} catch (error) {
 			console.log('Error signUp');
 		} finally {
+			setIsLoading(false);
 		}
 	};
 	return (

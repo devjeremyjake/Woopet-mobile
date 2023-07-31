@@ -13,6 +13,7 @@ import routes from '../../../navigations/routes';
 import { SignInUser } from '../../../apis/auth/Auth';
 import authStorage from '../../../auth/Storage';
 import { AuthContextUser } from '../../../context/UserContext';
+import useLocation from '../../../hooks/useLocation/useLocation';
 
 const validationSchema = Yup.object().shape({
 	email: Yup.string().required().email().label('email'),
@@ -23,6 +24,7 @@ const SignIn = () => {
 	const navigation = useNavigation<MyNavigationProp>();
 	const [isLoading, setIsLoading] = useState(false);
 	const { setUser } = useContext(AuthContextUser);
+	const { locationCoords, address } = useLocation();
 
 	const handleSubmit = async ({
 		email,
@@ -36,6 +38,10 @@ const SignIn = () => {
 			const object = JSON.stringify({
 				email,
 				password,
+				long: locationCoords?.longitude,
+				lat: locationCoords?.latitude,
+				city: address?.[0]?.city,
+				country: address?.[0]?.country,
 			});
 			const responseObject = await SignInUser(object);
 			if (responseObject.status === 200) {

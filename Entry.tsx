@@ -1,12 +1,12 @@
 import { View, Text, SafeAreaView } from 'react-native';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import OnboardingNavigator from './navigations/OnboardingNavigator';
-import BottomNavigator from './navigations/ButtomNavigator';
 import { AuthContextUser } from './context/UserContext';
 import authStorage from './auth/Storage';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
+import MainNavigator from './navigations/MainNavigator';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -78,7 +78,7 @@ const Entry = () => {
 
 	return (
 		<View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-			{user ? <BottomNavigator /> : <OnboardingNavigator />}
+			{user ? <MainNavigator /> : <OnboardingNavigator />}
 		</View>
 	);
 };

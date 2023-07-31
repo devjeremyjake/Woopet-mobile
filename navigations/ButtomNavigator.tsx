@@ -2,17 +2,28 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BASE_GREY_1, DIMENSION_1, HEADING_FONT } from '../constants';
 import routes from './routes';
 import HomeScreen from '../screens/tabScreens/HomeScreen/HomeScreen';
+import HomeSvg from '../assets/svgs/HomeSvg';
 import SettingScreen from '../screens/tabScreens/SettingScreen/SettingScreen';
+import ProfileSvg from '../assets/svgs/ProfileSvg';
+import MomentSvg from '../assets/svgs/MomentSvg';
 import MomentScreen from '../screens/tabScreens/MomentScreen/MomentScreen';
 import ServicesScreen from '../screens/tabScreens/ServicesScreen/ServicesScreen';
-import {
-	HomeIcon,
-	MomentIcon,
-	ProfileIcon,
-	ServicesIcon,
-} from '../components/TabIcons';
+import WorkSvg from '../assets/svgs/WorkSvg';
 
 const Tab = createBottomTabNavigator();
+
+const HomeTabIcon = ({ focused }: { focused: boolean }) => (
+	<HomeSvg color={focused ? '#000' : '#AEAEB2'} />
+);
+const ProfileTabIcon = ({ focused }: { focused: boolean }) => (
+	<ProfileSvg color={focused ? '#000' : '#AEAEB2'} />
+);
+const MomentTabIcon = ({ focused }: { focused: boolean }) => (
+	<MomentSvg color={focused ? '#000' : '#AEAEB2'} />
+);
+const ServicesTabIcon = ({ focused }: { focused: boolean }) => (
+	<WorkSvg color={focused ? '#000' : '#AEAEB2'} />
+);
 
 const BottomNavigator = () => (
 	<Tab.Navigator
@@ -39,7 +50,7 @@ const BottomNavigator = () => (
 			name={routes.TAB_HOME_SCREEN}
 			component={HomeScreen}
 			options={{
-				tabBarIcon: ({ focused }) => <HomeIcon focused={focused} />,
+				tabBarIcon: HomeTabIcon,
 				tabBarLabel: 'Home',
 			}}
 		/>
@@ -47,7 +58,7 @@ const BottomNavigator = () => (
 			name={routes.TAB_MOMENT_SCREEN}
 			component={MomentScreen}
 			options={{
-				tabBarIcon: ({ focused }) => <MomentIcon focused={focused} />,
+				tabBarIcon: MomentTabIcon,
 				tabBarLabel: 'Moment',
 			}}
 		/>
@@ -55,7 +66,7 @@ const BottomNavigator = () => (
 			name={routes.TAB_SERVICES_SCREEN}
 			component={ServicesScreen}
 			options={{
-				tabBarIcon: ({ focused }) => <ServicesIcon focused={focused} />,
+				tabBarIcon: ServicesTabIcon,
 				tabBarLabel: 'Services',
 			}}
 		/>
@@ -63,7 +74,7 @@ const BottomNavigator = () => (
 			name={routes.TAB_SETTING_SCREEN}
 			component={SettingScreen}
 			options={{
-				tabBarIcon: ({ focused }) => <ProfileIcon focused={focused} />,
+				tabBarIcon: ProfileTabIcon,
 				tabBarLabel: 'Profile',
 			}}
 		/>

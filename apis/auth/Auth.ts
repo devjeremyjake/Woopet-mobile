@@ -32,3 +32,29 @@ export const SignInUser = async (item: any): Promise<AxiosResponse<any>> => {
 		throw error;
 	}
 };
+export const SignUpUser = async (item: any): Promise<AxiosResponse<any>> => {
+	try {
+		const response = await axios.post(
+			`${BASEURL}/api/auth/signup`,
+			item,
+			validationParams
+		);
+		return response;
+	} catch (error) {
+		console.log('Error Fetch', error);
+		throw error;
+	}
+};
+export const VerifyUser = async (item: any): Promise<AxiosResponse<any>> => {
+	try {
+		const response = await axios.post(
+			`${BASEURL}/api/auth/verifyUser`,
+			item,
+			validationParams
+		);
+		return response;
+	} catch (error) {
+		console.log('Error Fetch', error);
+		throw error;
+	}
+};

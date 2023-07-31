@@ -11,6 +11,8 @@ export interface UserInfo {
 	lat: number | null;
 	city: string | null;
 	country: string | null;
+	isVerified: Boolean;
+	isSeller: Boolean;
 	createdAt: Date;
 	updatedAt: Date;
 	favoriteIds: any[];

@@ -6,6 +6,7 @@ import { BASE_GREY_2 } from '../../../constants';
 import EyeOpenSvg from '../../../assets/svgs/EyeOpenSvg';
 import EyeCloseSvg from '../../../assets/svgs/EyeCloseSvg';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { formikContextProps } from '../../../types/custom';
 
 interface FormFieldProp {
 	name: string;
@@ -16,11 +17,9 @@ interface FormFieldProp {
 	isPassword: boolean;
 	keyboardType?: 'default' | 'email-address' | 'numeric';
 	fieldName: string;
+	maxLength?: number;
+	multiline?: boolean;
 }
-
-type formikContextProps = {
-	[key: string]: string;
-};
 
 const InputField: FC<FormFieldProp> = ({
 	name,

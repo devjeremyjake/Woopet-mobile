@@ -1,5 +1,6 @@
-import { View, Text, SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import React, { FC } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styles from './Style';
 
 interface SafeAreaProp {
@@ -7,7 +8,12 @@ interface SafeAreaProp {
 }
 
 const SafeAreaComponent: FC<SafeAreaProp> = ({ children }) => {
-	return <SafeAreaView style={styles.container}>{children}</SafeAreaView>;
+	const insets = useSafeAreaInsets();
+	return (
+		<SafeAreaView style={[styles.container, { paddingTop: insets.top }]}>
+			{children}
+		</SafeAreaView>
+	);
 };
 
 export default SafeAreaComponent;

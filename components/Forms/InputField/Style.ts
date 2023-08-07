@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import {
-	BASE_BLACK,
 	BASE_GREY_2,
 	BASE_GREY_3,
 	BASE_RED,
@@ -45,7 +44,7 @@ const styles = StyleSheet.create({
 		fontWeight: '500',
 		fontFamily: HEADING_FONT,
 		marginTop: DIMENSION_2,
-		marginLeft: DIMENSION_1 - 3,
+		marginLeft: DIMENSION_2,
 	},
 });
 

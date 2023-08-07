@@ -31,6 +31,9 @@ const styles = StyleSheet.create({
 		color: BASE_GREY_2,
 		marginBottom: DIMENSION_1,
 	},
+	submitButton: {
+		marginTop: DIMENSION_1,
+	},
 });
 
 export default styles;

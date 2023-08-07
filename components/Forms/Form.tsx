@@ -1,14 +1,20 @@
 import React, { FC } from 'react';
 import { Formik } from 'formik';
 
+export interface FormValuesProp {
+	fullname: string;
+	email: string;
+	password: string;
+	price: number;
+	description: string;
+	category: any;
+	image: string;
+}
+
 type formProp = {
-	onSubmit: (e: { fullname: string; email: string; password: string }) => void;
+	onSubmit: (e: FormValuesProp) => void;
 	children: React.ReactNode;
-	initialValues: {
-		fullname: string;
-		email: string;
-		password: string;
-	};
+	initialValues: FormValuesProp;
 	validationSchema: object;
 };
 

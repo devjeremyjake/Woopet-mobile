@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { BASE_BLACK, FONT_SIZE_4, TEXT_FONT } from '../../../constants';
 
 interface PickerItemProp {
 	item: any;
@@ -16,7 +17,12 @@ const PickerItem: FC<PickerItemProp> = ({ item, onPress }) => {
 
 const styles = StyleSheet.create({
 	text: {
-		padding: 20,
+		paddingHorizontal: 20,
+		paddingVertical: 13,
+		color: BASE_BLACK,
+		fontSize: FONT_SIZE_4,
+		fontWeight: '700',
+		fontFamily: TEXT_FONT,
 	},
 });
 

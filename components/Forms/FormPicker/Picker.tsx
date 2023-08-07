@@ -10,15 +10,17 @@ import React, { FC, useCallback, useState } from 'react';
 import styles from './Style';
 import ArrowDownSvg from '../../../assets/svgs/ArrowDownSvg';
 import PickerItem from './PickerItem';
+import { useFormikContext } from 'formik';
+import { formikContextProps } from '../../../types/custom';
 
 export interface PickerProps {
 	items: any[];
 	numberOfColumns: number;
-	onSelectItem: () => void;
-	PickerItemComponent: React.ReactElement;
+	onSelectItem: (e: any) => void;
 	placeholder: string;
-	selectedItem: string;
+	selectedItem: any;
 	width: string;
+	name: string;
 }
 
 interface SingleItem {
@@ -27,9 +29,9 @@ interface SingleItem {
 
 const Picker: FC<PickerProps> = ({
 	items,
+	name,
 	numberOfColumns = 1,
 	onSelectItem,
-	PickerItemComponent = PickerItem,
 	placeholder,
 	selectedItem,
 	width = '100%',
@@ -41,41 +43,47 @@ const Picker: FC<PickerProps> = ({
 
 	const renderItem = useCallback(({ item }: SingleItem) => {
 		return (
-			//     <PickerItemComponent
-			//     item={item}
-			//     label={item.label}
-			//     onPress={() => {
-			//       setModalVisible(false);
-			//       onSelectItem(item);
-			//     }}
-			//   />
-			<View>
-				<Text>Here</Text>
-			</View>
+			<PickerItem
+				item={item}
+				onPress={() => {
+					setModalVisible(false);
+					onSelectItem(item);
+				}}
+			/>
 		);
 	}, []);
+	const { errors, touched } = useFormikContext<formikContextProps>();
+
+	const errorBorder =
+		touched?.[name] && errors?.[name] && styles.inputRedBorder;
 
 	return (
 		<>
 			<TouchableWithoutFeedback onPress={modalState}>
-				<View style={[styles.container, { width }]}>
-					{selectedItem ? (
-						<Text style={styles.text}>{selectedItem}</Text>
-					) : (
-						<Text style={styles.placeholder}>{placeholder}</Text>
-					)}
-					<View style={{ marginLeft: 'auto' }}>
-						<ArrowDownSvg />
+				<View style={[styles.inputContainer, errorBorder as any]}>
+					<View style={[styles.container, { width }]}>
+						{selectedItem ? (
+							<Text style={styles.text}>{selectedItem.label}</Text>
+						) : (
+							<Text style={styles.placeholder}>{placeholder}</Text>
+						)}
+						<View style={{ marginLeft: 'auto' }}>
+							<ArrowDownSvg />
+						</View>
 					</View>
 				</View>
-				<Text>Picker</Text>
 			</TouchableWithoutFeedback>
-			<Modal visible={modalVisible} animationType="slide">
+			<Modal
+				visible={modalVisible}
+				animationType="slide"
+				presentationStyle="pageSheet"
+				statusBarTranslucent={false}
+			>
 				<>
 					<Button title="Close" onPress={() => setModalVisible(false)} />
 					<FlatList
 						data={items}
-						keyExtractor={(item) => item.value.toString()}
+						keyExtractor={(item) => item.id.toString()}
 						numColumns={numberOfColumns}
 						renderItem={renderItem}
 					/>

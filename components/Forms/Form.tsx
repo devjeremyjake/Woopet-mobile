@@ -9,6 +9,7 @@ export interface FormValuesProp {
 	description: string;
 	category: any;
 	image: string;
+	passwordConfirmation: string;
 }
 
 type formProp = {

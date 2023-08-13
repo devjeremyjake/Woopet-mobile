@@ -13,7 +13,6 @@ import routes from '../../../navigations/routes';
 import { SignInUser } from '../../../apis/auth/Auth';
 import authStorage from '../../../auth/Storage';
 import { AuthContextUser } from '../../../context/UserContext';
-import useLocation from '../../../hooks/useLocation/useLocation';
 
 const validationSchema = Yup.object().shape({
 	email: Yup.string().required().email().label('email'),
@@ -22,9 +21,8 @@ const validationSchema = Yup.object().shape({
 
 const SignIn = () => {
 	const navigation = useNavigation<MyNavigationProp>();
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const { setUser } = useContext(AuthContextUser);
-	const { locationCoords, address } = useLocation();
 
 	const handleSubmit = async ({
 		email,
@@ -38,12 +36,9 @@ const SignIn = () => {
 			const object = JSON.stringify({
 				email,
 				password,
-				long: locationCoords?.longitude,
-				lat: locationCoords?.latitude,
-				city: address?.[0]?.city,
-				country: address?.[0]?.country,
 			});
 			const responseObject = await SignInUser(object);
+
 			if (responseObject.status === 200) {
 				await authStorage.storeToken(responseObject.data.token);
 				const userInfo = await authStorage.getUser();
@@ -70,16 +65,15 @@ const SignIn = () => {
 								</View>
 							</TouchableWithoutFeedback>
 						</View>
-						{/* content */}
 						<Text style={styles.mainHeading}>Let’s continue</Text>
 						<Text style={styles.subheading}>Log in to view offers</Text>
-						<View>
+						<>
 							<Form
 								initialValues={{ email: '', fullname: '', password: '' }}
 								onSubmit={handleSubmit}
 								validationSchema={validationSchema}
 							>
-								<View>
+								<>
 									<FormField
 										autoCorrect={false}
 										name="email"
@@ -99,9 +93,7 @@ const SignIn = () => {
 									/>
 
 									<TouchableWithoutFeedback
-										onPress={() =>
-											navigation.navigate(routes.OTP_VERIFY_SCREEN)
-										}
+										onPress={() => navigation.navigate(routes.OTP_EMAIL_SCREEN)}
 									>
 										<View>
 											<Text style={styles.forPasswordText}>
@@ -113,9 +105,9 @@ const SignIn = () => {
 									<View style={styles.submitButton}>
 										<SubmitButton title="Proceed" />
 									</View>
-								</View>
+								</>
 							</Form>
-						</View>
+						</>
 					</View>
 					<LoadingComponent isLoading={isLoading} />
 				</>

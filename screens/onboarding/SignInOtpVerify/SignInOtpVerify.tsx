@@ -1,19 +1,21 @@
 import { View, Text } from 'react-native';
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useContext, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import SafeAreaComponent from '../../../components/SafeAreaComponent/SafeAreaComponent';
 import styles from './Style';
 import OtpInputs from '../../../components/OtpInputs/OtpInputs';
 import ButtonComponent from '../../../components/ButtonComponent/ButtonComponent';
 import { VerifyScreenProps } from '../../../navigations/OnboardingNavigator';
-import { VerifyOtpApi } from '../../../apis/auth/Auth';
+import { VerifyNewUserApi } from '../../../apis/auth/Auth';
 import { MyNavigationProp } from '../../../types/custom';
-import routes from '../../../navigations/routes';
 import LoadingComponent from '../../../components/LoadingComponent/LoadingComponent';
+import { AuthContextUser } from '../../../context/UserContext';
+import authStorage from '../../../auth/Storage';
 
-const OtpVerify: FC<VerifyScreenProps> = ({ route }) => {
+const SignInOtpVerify: FC<VerifyScreenProps> = ({ route }) => {
 	const { email } = route.params;
 	const navigation = useNavigation<MyNavigationProp>();
+	const { setUser } = useContext(AuthContextUser);
 	const [otpCode, setOtpCode] = useState<string>('');
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const otpValueEntry = useCallback((item: string) => {
@@ -28,11 +30,14 @@ const OtpVerify: FC<VerifyScreenProps> = ({ route }) => {
 			}
 			setIsLoading(true);
 			const object = JSON.stringify({ otp: otpCode });
-			const response = await VerifyOtpApi(object);
+			const response = await VerifyNewUserApi(object);
 			if (response.status === 200) {
 				// sucess message
 				console.log(response.data.message);
-				navigation.navigate(routes.NEW_PASSWORD_SCREEN);
+				const userInfo = await authStorage.getUser();
+				setUser(userInfo);
+			} else {
+				console.log(response.data.message);
 			}
 		} catch (error) {
 			console.log('Error verfying OTP');
@@ -60,4 +65,4 @@ const OtpVerify: FC<VerifyScreenProps> = ({ route }) => {
 	);
 };
 
-export default OtpVerify;
+export default SignInOtpVerify;

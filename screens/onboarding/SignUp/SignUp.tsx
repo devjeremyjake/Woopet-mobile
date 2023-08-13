@@ -22,7 +22,7 @@ const validationSchema = Yup.object().shape({
 
 const SignUp = () => {
 	const navigation = useNavigation<MyNavigationProp>();
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const { locationCoords, address } = useLocation();
 	const handleSubmit = async ({
 		fullname,
@@ -48,7 +48,7 @@ const SignUp = () => {
 			if (response.status === 200) {
 				await authStorage.storeToken(response.data.token);
 				await authStorage.getToken();
-				navigation.navigate(routes.OTP_VERIFY_SCREEN, { email });
+				navigation.navigate(routes.SIGN_IN_OTP_SCREEN, { email });
 			} else {
 				console.log('Error', response.data.message);
 			}
@@ -74,7 +74,7 @@ const SignUp = () => {
 						{/* content */}
 						<Text style={styles.mainHeading}>Let’s start here</Text>
 						<Text style={styles.subheading}>Fill in your details to begin</Text>
-						<View>
+						<>
 							<Form
 								initialValues={{ email: '', fullname: '', password: '' }}
 								onSubmit={handleSubmit}
@@ -112,7 +112,7 @@ const SignUp = () => {
 									</View>
 								</View>
 							</Form>
-						</View>
+						</>
 					</View>
 					<LoadingComponent isLoading={isLoading} />
 				</>

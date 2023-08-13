@@ -10,9 +10,10 @@ const validationParams = {
 export const FetchProfile = async () => {
 	try {
 		const response = await axios.get(
-			`${BASEURL}/api/profile`,
+			`${BASEURL}/api/users/profile`,
 			validationParams
 		);
+		console.log(response);
 		return response.data.user;
 	} catch (error) {
 		console.log('Error Fetch', error);
@@ -22,7 +23,7 @@ export const FetchProfile = async () => {
 export const SignInUser = async (item: any): Promise<AxiosResponse<any>> => {
 	try {
 		const response = await axios.post(
-			`${BASEURL}/api/auth/signin`,
+			`${BASEURL}/api/auth/login`,
 			item,
 			validationParams
 		);
@@ -35,7 +36,7 @@ export const SignInUser = async (item: any): Promise<AxiosResponse<any>> => {
 export const SignUpUser = async (item: any): Promise<AxiosResponse<any>> => {
 	try {
 		const response = await axios.post(
-			`${BASEURL}/api/auth/signup`,
+			`${BASEURL}/api/auth/register`,
 			item,
 			validationParams
 		);
@@ -45,10 +46,56 @@ export const SignUpUser = async (item: any): Promise<AxiosResponse<any>> => {
 		throw error;
 	}
 };
-export const VerifyUser = async (item: any): Promise<AxiosResponse<any>> => {
+
+export const RequestOtpApi = async (item: any): Promise<AxiosResponse<any>> => {
 	try {
 		const response = await axios.post(
-			`${BASEURL}/api/auth/verifyUser`,
+			`${BASEURL}/api/auth/forgot-password`,
+			item,
+			validationParams
+		);
+		return response;
+	} catch (error) {
+		console.log('Error Fetch', error);
+		throw error;
+	}
+};
+export const VerifyOtpApi = async (item: any): Promise<AxiosResponse<any>> => {
+	try {
+		const response = await axios.post(
+			`${BASEURL}/api/auth/verifyOtp`,
+			item,
+			validationParams
+		);
+		return response;
+	} catch (error) {
+		console.log('Error Fetch', error);
+		throw error;
+	}
+};
+
+export const VerifyNewUserApi = async (
+	item: any
+): Promise<AxiosResponse<any>> => {
+	try {
+		const response = await axios.post(
+			`${BASEURL}/api/auth/user/verify`,
+			item,
+			validationParams
+		);
+		return response;
+	} catch (error) {
+		console.log('Error Fetch', error);
+		throw error;
+	}
+};
+
+export const SubmitNewPasswordApi = async (
+	item: any
+): Promise<AxiosResponse<any>> => {
+	try {
+		const response = await axios.post(
+			`${BASEURL}/api/auth/reset-password`,
 			item,
 			validationParams
 		);

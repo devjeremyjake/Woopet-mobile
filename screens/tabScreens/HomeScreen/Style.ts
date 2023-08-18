@@ -8,12 +8,9 @@ import {
 	DIMENSION_2,
 	FONT_SIZE_2,
 	FONT_SIZE_4,
-	FONT_SIZE_5,
-	FONT_SIZE_6,
 	HEADING_BOLD,
 	HEADING_FONT,
 	TEXT_FONT,
-	WHITE,
 } from '../../../constants';
 
 const styles = StyleSheet.create({
@@ -41,17 +38,6 @@ const styles = StyleSheet.create({
 		fontWeight: '700',
 		fontSize: FONT_SIZE_4,
 		color: BASE_GREY_2,
-	},
-	buttonWrapper: {
-		paddingHorizontal: DIMENSION_2 + 5,
-		paddingVertical: DIMENSION_2 + 3,
-		borderRadius: BORDER_RADIUS_1 - 6,
-	},
-	buttonText: {
-		fontFamily: HEADING_BOLD,
-		fontWeight: '700',
-		fontSize: FONT_SIZE_5,
-		color: WHITE,
 	},
 	locationWrapper: {
 		backgroundColor: BASE_GREY_3,

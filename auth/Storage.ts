@@ -17,6 +17,7 @@ const storeToken = async (token: string) => {
 const getToken = async () => {
 	try {
 		const token = await AsyncStorage.getItem(authKey);
+
 		if (token) {
 			axios.defaults.headers.common['Authorization'] = `${token}`;
 		} else {

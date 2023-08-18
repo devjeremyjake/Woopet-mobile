@@ -20,5 +20,6 @@ export const BASE_RED = 'rgba(255,0,0, 1)';
 
 export const DIMENSION_1 = 20;
 export const DIMENSION_2 = 10;
+export const DIMENSION_3 = 44;
 
 export const BORDER_RADIUS_1 = 14;

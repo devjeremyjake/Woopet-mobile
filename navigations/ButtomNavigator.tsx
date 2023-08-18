@@ -1,7 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BASE_GREY_1, DIMENSION_1, HEADING_FONT } from '../constants';
 import routes from './routes';
-import HomeScreen from '../screens/tabScreens/HomeScreen/HomeScreen';
 import HomeSvg from '../assets/svgs/HomeSvg';
 import SettingScreen from '../screens/tabScreens/SettingScreen/SettingScreen';
 import ProfileSvg from '../assets/svgs/ProfileSvg';
@@ -9,6 +8,7 @@ import MomentSvg from '../assets/svgs/MomentSvg';
 import MomentScreen from '../screens/tabScreens/MomentScreen/MomentScreen';
 import ServicesScreen from '../screens/tabScreens/ServicesScreen/ServicesScreen';
 import WorkSvg from '../assets/svgs/WorkSvg';
+import LisitingNavigator from './ListingNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -48,7 +48,7 @@ const BottomNavigator = () => (
 	>
 		<Tab.Screen
 			name={routes.TAB_HOME_SCREEN}
-			component={HomeScreen}
+			component={LisitingNavigator}
 			options={{
 				tabBarIcon: HomeTabIcon,
 				tabBarLabel: 'Home',

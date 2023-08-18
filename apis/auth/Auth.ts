@@ -13,7 +13,6 @@ export const FetchProfile = async () => {
 			`${BASEURL}/api/users/profile`,
 			validationParams
 		);
-		console.log(response);
 		return response.data.user;
 	} catch (error) {
 		console.log('Error Fetch', error);

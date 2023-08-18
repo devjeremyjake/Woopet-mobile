@@ -5,14 +5,14 @@ import SafeAreaComponent from '../../../components/SafeAreaComponent/SafeAreaCom
 import styles from './Style';
 import OtpInputs from '../../../components/OtpInputs/OtpInputs';
 import ButtonComponent from '../../../components/ButtonComponent/ButtonComponent';
-import { VerifyScreenProps } from '../../../navigations/OnboardingNavigator';
+import { VerifyScreenSignUpProps } from '../../../navigations/OnboardingNavigator';
 import { VerifyNewUserApi } from '../../../apis/auth/Auth';
 import { MyNavigationProp } from '../../../types/custom';
 import LoadingComponent from '../../../components/LoadingComponent/LoadingComponent';
 import { AuthContextUser } from '../../../context/UserContext';
 import authStorage from '../../../auth/Storage';
 
-const SignInOtpVerify: FC<VerifyScreenProps> = ({ route }) => {
+const SignInOtpVerify: FC<VerifyScreenSignUpProps> = ({ route }) => {
 	const { email } = route.params;
 	const navigation = useNavigation<MyNavigationProp>();
 	const { setUser } = useContext(AuthContextUser);

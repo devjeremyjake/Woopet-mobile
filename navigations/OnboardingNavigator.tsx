@@ -24,6 +24,11 @@ export type VerifyScreenProps = {
 	route: VerifyScreenRouteProp;
 };
 
+type VerifyOtpRouteProp = RouteProp<RootStackParamList, 'SIGN_IN_OTP_SCREEN'>;
+export type VerifyScreenSignUpProps = {
+	route: VerifyOtpRouteProp;
+};
+
 const Stack = createStackNavigator<RootStackParamList>();
 
 const OnboardingNavigator = () => {
